@@ -1,0 +1,183 @@
+/* =======================
+    Project Card Styling (NEW ADDITION)
+======================= */
+
+/* 確保內容區塊有適當的寬度和邊距 */
+.about .content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px; /* 控制專案卡片之間的垂直間距 */
+}
+
+/* 基本專案卡片樣式 */
+.project-card {
+    display: flex;
+    align-items: center;
+    background-color: rgba(43, 45, 66, 0.03); /* 輕微的深色背景色 */
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(43, 45, 66, 0.1); /* 細微的深色邊框 */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 圖片區塊 */
+.project-image {
+    flex: 0 0 40%; /* 圖片佔據 40% 寬度 */
+    max-height: 300px; /* 限制圖片高度 */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+/* 內文區塊 */
+.project-details {
+    flex: 1; /* 內文佔據剩餘空間 */
+    padding: 0 30px;
+}
+
+.project-title {
+    font-size: 2.2em;
+    color: #2b2d42; /* 深色標題 */
+    margin-bottom: 5px;
+}
+
+.project-subtitle {
+    font-size: 1.1em;
+    color: #8d99ae; /* 次要顏色 */
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.project-description {
+    color: #2b2d42;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* 左圖右文佈局 (默認) */
+.project-left .project-details {
+    padding-left: 30px;
+    padding-right: 0;
+}
+
+/* 右圖左文佈局 (使用 flex-direction: row-reverse 反轉順序) */
+.project-right {
+    flex-direction: reverse; /* 關鍵: 將順序反轉 */
+}
+
+/* 確保 padding 也正確反轉 */
+.project-right .project-details {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+/* 全寬卡片佈局 (移除圖片，內文居中) */
+.project-full {
+    display: block; /* 變回塊級元素 */
+    text-align: center;
+}
+
+.project-full .project-details {
+    padding: 0;
+}
+
+/* 標籤樣式 */
+.project-tags {
+    margin-bottom: 20px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #ef233c; /* 主題色 */
+    color: #edf2f4;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+/* 連結樣式 */
+.project-link {
+    display: inline-block;
+    color: #ef233c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #d90429;
+}
+
+/* RWD 響應式設計 */
+@media (max-width: 900px) {
+    /* 在平板和手機上，圖片和內文垂直堆疊 */
+    .project-card,
+    .project-right {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .project-image {
+        flex: 0 0 auto; /* 移除 flex 限制 */
+        width: 100%;
+        max-height: 250px;
+        margin-bottom: 20px;
+    }
+
+    .project-details,
+    .project-right .project-details {
+        padding: 0;
+    }
+
+    .project-title {
+        font-size: 1.8em;
+    }
+}
+
+
+/* --- JS Fade-in Styling (Optional) --- */
+
+/* 初始/離開狀態：完全透明，向下移動 50px */
+.project-card.fade-in {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+
+/* 滾動進入視窗時的最終狀態 */
+.project-card.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+}
+
+/* 滾動離開視窗時的動畫 */
+.project-card.fade-in.is-leaving {
+    opacity: 0.2; 
+    transform: translateY(-20px) scale(0.98);
+    transition: opacity 1s ease-in, transform 1s ease-in;
+}
